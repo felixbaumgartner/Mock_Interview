@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { evaluateAnswerSchema } from './utils/validation';
 import { checkRateLimit, getClientIdentifier } from './utils/rateLimit';
 import { buildAnswerEvaluationPrompt } from '../src/prompts/answerEvaluation';
@@ -41,18 +41,19 @@ export default async function handler(
 
     const { question, modelAnswer, userAnswer, resumeContext, jobDescContext } = validationResult.data;
 
-    // Initialize Anthropic client
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    // Initialize Gemini client
+    const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error('ANTHROPIC_API_KEY is not set');
+      console.error('GEMINI_API_KEY is not set');
       return res.status(500).json({
         success: false,
         error: 'Server configuration error',
       });
     }
 
-    const client = new Anthropic({ apiKey });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     // Build prompt
     const prompt = buildAnswerEvaluationPrompt(
@@ -62,23 +63,10 @@ export default async function handler(
       resumeContext
     );
 
-    // Call Claude API
-    const message = await client.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 2000,
-      temperature: 0.5,
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-    });
-
-    // Extract text from response
-    const responseText = message.content[0].type === 'text'
-      ? message.content[0].text
-      : '';
+    // Call Gemini API
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const responseText = response.text();
 
     if (!responseText) {
       throw new Error('No response from AI');
