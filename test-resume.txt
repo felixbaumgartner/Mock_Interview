@@ -1,0 +1,44 @@
+SOFTWARE ENGINEER
+
+John Doe
+john.doe@email.com | (555) 123-4567 | LinkedIn: linkedin.com/in/johndoe
+
+PROFESSIONAL SUMMARY
+Experienced Software Engineer with 5+ years of expertise in full-stack web development. Proficient in React, TypeScript, Node.js, and cloud technologies. Proven track record of delivering scalable applications and leading technical initiatives.
+
+TECHNICAL SKILLS
+Languages: JavaScript, TypeScript, Python, Java
+Frontend: React, Redux, Next.js, HTML5, CSS3, Tailwind CSS
+Backend: Node.js, Express, REST APIs, GraphQL
+Database: PostgreSQL, MongoDB, Redis
+Cloud: AWS (EC2, S3, Lambda), Docker, Kubernetes
+Tools: Git, Jest, Webpack, Vite, CI/CD
+
+PROFESSIONAL EXPERIENCE
+
+Senior Software Engineer | Tech Corp Inc. | 2021 - Present
+• Led development of customer-facing dashboard serving 50,000+ users
+• Improved application performance by 40% through code optimization and caching strategies
+• Mentored team of 3 junior developers on best practices and code reviews
+• Implemented CI/CD pipeline reducing deployment time from 2 hours to 15 minutes
+
+Software Engineer | StartUp Solutions | 2019 - 2021
+• Developed RESTful APIs handling 1M+ requests per day
+• Built responsive web applications using React and TypeScript
+• Collaborated with product team to define technical requirements
+• Reduced bug count by 60% through implementation of comprehensive testing
+
+EDUCATION
+Bachelor of Science in Computer Science
+University of Technology | 2015 - 2019
+GPA: 3.8/4.0
+
+PROJECTS
+E-commerce Platform
+• Built full-stack e-commerce site using MERN stack
+• Integrated Stripe payment processing
+• Implemented real-time inventory management
+
+CERTIFICATIONS
+• AWS Certified Solutions Architect - Associate
+• MongoDB Certified Developer

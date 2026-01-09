@@ -19,18 +19,32 @@ export function FileUploader({
   const [extractedPreview, setExtractedPreview] = useState<string | null>(null);
 
   const onDrop = useCallback(
-    async (acceptedFiles: File[]) => {
+    async (acceptedFiles: File[], rejectedFiles: any[]) => {
+      console.log('FileUploader - onDrop called', {
+        acceptedFiles: acceptedFiles.length,
+        rejectedFiles: rejectedFiles.length
+      });
+
       setError(null);
 
+      if (rejectedFiles.length > 0) {
+        console.log('FileUploader - Files rejected:', rejectedFiles);
+        setError('Please upload only PDF or DOCX files under 10MB');
+        return;
+      }
+
       if (acceptedFiles.length === 0) {
+        console.log('FileUploader - No files accepted');
         return;
       }
 
       const selectedFile = acceptedFiles[0];
+      console.log('FileUploader - Processing file:', selectedFile.name, selectedFile.type);
 
       // Validate file
       const validation = validateFile(selectedFile);
       if (!validation.valid) {
+        console.log('FileUploader - Validation failed:', validation.error);
         setError(validation.error || 'Invalid file');
         return;
       }
@@ -39,10 +53,13 @@ export function FileUploader({
       setIsParsing(true);
 
       try {
+        console.log('FileUploader - Starting to parse document');
         const text = await parseDocument(selectedFile);
+        console.log('FileUploader - Document parsed successfully, length:', text.length);
         setExtractedPreview(text.substring(0, 500));
         onTextExtracted(text);
       } catch (err) {
+        console.error('FileUploader - Parse error:', err);
         setError(err instanceof Error ? err.message : 'Failed to parse document');
         setFile(null);
       } finally {
@@ -90,11 +107,16 @@ export function FileUploader({
             )}
           </>
         ) : (
-          <p>
-            {isDragActive
-              ? 'Drop file here'
-              : 'Drag & drop file here, or click to select'}
-          </p>
+          <>
+            <p>
+              {isDragActive
+                ? 'Drop file here'
+                : 'Drag & drop file here, or click to select'}
+            </p>
+            <button type="button" className="file-uploader__browse-btn">
+              Browse Files
+            </button>
+          </>
         )}
       </div>
 
