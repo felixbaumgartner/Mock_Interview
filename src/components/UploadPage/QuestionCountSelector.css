@@ -1,0 +1,45 @@
+.question-count-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question-count-selector__label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.question-count-selector__options {
+  display: flex;
+  gap: 1rem;
+}
+
+.question-count-selector__option {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.question-count-selector__option:hover {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.question-count-selector__option--selected {
+  border-color: #2563eb;
+  background-color: #2563eb;
+  color: white;
+}
+
+.question-count-selector__help {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}

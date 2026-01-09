@@ -1,0 +1,72 @@
+.file-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-uploader__label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.file-uploader__dropzone {
+  border: 2px dashed #d1d5db;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #f9fafb;
+}
+
+.file-uploader__dropzone:hover {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.file-uploader__dropzone--active {
+  border-color: #2563eb;
+  background-color: #dbeafe;
+}
+
+.file-uploader__dropzone--error {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.file-uploader__dropzone--success {
+  border-color: #16a34a;
+  background-color: #f0fdf4;
+}
+
+.file-uploader__filename {
+  font-weight: 600;
+  color: #16a34a;
+  margin: 0;
+}
+
+.file-uploader__preview {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: left;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-uploader__error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.file-uploader__help {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}
