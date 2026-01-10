@@ -78,7 +78,7 @@ export const useInterviewStore = create<InterviewState>((set, get) => ({
         });
       } else {
         // Use real API
-        const response = await callAPI<GenerateQuestionsResponse>('/api/generate-questions', {
+        const response = await callAPI<GenerateQuestionsResponse>('/generate-questions', {
           method: 'POST',
           body: JSON.stringify({
             resumeText,
@@ -143,7 +143,7 @@ export const useInterviewStore = create<InterviewState>((set, get) => ({
         set({ evaluations: newEvaluations });
       } else {
         // Use real API
-        const response = await callAPI<EvaluateAnswerResponse>('/api/evaluate-answer', {
+        const response = await callAPI<EvaluateAnswerResponse>('/evaluate-answer', {
           method: 'POST',
           body: JSON.stringify({
             question: question.question,

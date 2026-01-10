@@ -13,6 +13,7 @@ export async function callAPI<T>(
 ): Promise<T> {
   try {
     const url = `${API_BASE_URL}${endpoint}`;
+    console.log('🔍 API Request:', url, options);
 
     const response = await fetch(url, {
       ...options,
@@ -22,7 +23,12 @@ export async function callAPI<T>(
       },
     });
 
+    console.log('🔍 API Response status:', response.status, response.statusText);
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ API Error response:', errorText);
+
       if (response.status === 429) {
         throw new APIError(
           'Rate limit exceeded. Please try again in an hour.',
@@ -37,16 +43,18 @@ export async function callAPI<T>(
       }
       if (response.status >= 500) {
         throw new APIError(
-          'Server error. Please try again later.',
+          `Server error: ${errorText}`,
           response.status
         );
       }
-      throw new APIError('Request failed', response.status);
+      throw new APIError(`Request failed: ${errorText}`, response.status);
     }
 
     const data = await response.json();
+    console.log('✅ API Success:', data);
     return data;
   } catch (error) {
+    console.error('❌ API Client Error:', error);
     if (error instanceof APIError) {
       throw error;
     }
